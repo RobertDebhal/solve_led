@@ -6,7 +6,8 @@ Created on 1 Mar 2018
 @author: robbie
 '''
 import unittest
-from solve_led.lightTester import *
+from lightTester import *
+#from solve_led.lightTester import *
 #from solve_led.console_script import *
 
 class TestLightTesterClass(unittest.TestCase):
@@ -47,22 +48,20 @@ class TestLightTesterClass(unittest.TestCase):
         
         
     def test_apply(self):
-        """
-        a = lightTester(1000)
-        a.apply('turn on 50,50 through 100,100') #count should now be 2,500
-        a.apply('switch 0,0 through 999,999') #count should now be 997,500
-        a.apply('turn off 900,0 through 999,999) #count should now be 897,500
-        a.apply('turnoff 0,0 through 999,999) #should do nothing, count the same
-        a.apply('switch 0,0 thru 999,999') #should do nothing, count the same
-        a.apply('turn on 900,-10 through 999,999') #should correct for light out of range.
-                                                   count should now be 997,500
-        a.apply('turn off 900,0 through 1000,1000) #should correct for light out of range.
-                                                   count should now be 897,500
-        self.assertTrue(a.count()==897,500)""" 
+        lights = lightTester(1000)
+        lights.apply(('turn on', '51', '51', '100', '100')) #count should now be 2,500
+        lights.apply(('switch' , '0','0', '999' ,'999')) #count should now be 997,500
+        lights.apply(('turn off', '900', '0', '999', '999')) #count should now be 897,500
+        lights.apply(('turn on', '900','-10','999','999')) #should correct for light out of range.
+                                                   #count should now be 997,500
+        lights.apply(('turn off', '900', '0', '1000', '1000')) #should correct for light out of range.
+                                                   #count should now be 897,500
+        self.assertTrue(lights.count==897500)
         
 class ConsoleScriptTest:
     def check_file(self):
         """
+        Also should check at this stage for incorrect commands to ignore
         self.Assert(fileCheck==True) #check for the existence of input file
         """
     
