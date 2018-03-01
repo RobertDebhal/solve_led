@@ -29,11 +29,11 @@ class lightTester:
     def switch(self,tuple):
         for i in range (int(tuple[0]),int(tuple[2])+1):
             for j in range(int(tuple[1]),int(tuple[3])+1):
-                if lights[i][j]:
-                    lights[i][j] = False
+                if self.lights[i][j]:
+                    self.lights[i][j] = False
                     self.count-=1
                 else:
-                    lights[i][j] = True
+                    self.lights[i][j] = True
                     self.count+=1
          
     def apply(self,cmd):
