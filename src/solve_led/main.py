@@ -5,8 +5,8 @@ Created on 1 Mar 2018
 skeleton code from Assignmnt3: hints
 '''
 
-from lightTester import lightTester
-import parse_file, sys
+from solve_led.lightTester import lightTester
+import solve_led.parse_file as parse_file, sys
 
 def main():
     #source: https://stackoverflow.com/questions/40753946/python-setup-tools-console-scripts-with-arguments 
