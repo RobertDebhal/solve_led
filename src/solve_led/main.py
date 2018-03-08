@@ -10,8 +10,8 @@ import solve_led.parse_file as parse_file, sys
 
 def main():
     #source: https://stackoverflow.com/questions/40753946/python-setup-tools-console-scripts-with-arguments 
-    arg1, arg2 = sys.argv[1], sys.argv[2]
-    if len(sys.argv)==2:
+    if len(sys.argv)==3:
+        arg1, arg2 = sys.argv[1], sys.argv[2]
         if arg1=='--input'or arg1=='-I':
             instructions = parse_file.ParseFile(arg2)
     
@@ -23,5 +23,7 @@ def main():
             print("#occupied:",lights.count()) 
         else:
             print(arg1+" is not recognised as a valid option")
+    else:
+        print("Please use a valid command line option and txt file/URL")
 if __name__ == '__main__':
     main()
