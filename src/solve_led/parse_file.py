@@ -4,11 +4,16 @@ Created on 1 Mar 2018
 @author: robbie
 '''
 import urllib.request as url, re
-
+import sys 
 class ParseFile:
-    
     def __init__(self,filename,type='local'):
         
+        try:
+            self.file = open(filename,'r')
+        except FileNotFoundError:
+            type='https'
+            
+            
         valid = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
         
         if type=='local':
