@@ -12,12 +12,9 @@ import sys
 from setuptools import setup
 
 # Add here console scripts and other entry points in ini-style format
-entry_points = """
-[console_scripts]
-# script_name = solve_led.module:function
-# For example:
-# fibonacci = solve_led.skeleton:run
-"""
+entry_points = {
+          'console_scripts':['solve_led=solve_led.main:main']
+          }
 
 
 def setup_package():
