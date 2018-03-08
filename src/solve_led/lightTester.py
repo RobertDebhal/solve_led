@@ -10,32 +10,29 @@ class lightTester:
     def __init__(self,N):
          
         self.lights = [[False]*N for i in range(N)]
-        self.count=0
+        #consider using count method instead of attribute...
+        # lots of unnecessary overhead
         self.size=N
         
     def turn_on(self,tuple):
-        for i in range (max(int(tuple[0]),0),min(int(tuple[2])+1,self.size)):
-            for j in range(max(int(tuple[1]),0),min(int(tuple[3])+1,self.size)):
+        for i in range (max(min(int(tuple[0]),int(tuple[2])),0),min(max(int(tuple[2])+1,int(tuple[0])+1),self.size)):
+            for j in range(max(min(int(tuple[1]),int(tuple[3])),0),min(max(int(tuple[1])+1,int(tuple[3])+1),self.size)):
                 if not self.lights[i][j]:
                     self.lights[i][j]=True
-                    self.count+=1
                     
     def turn_off(self,tuple):
-        for i in range (max(int(tuple[0]),0),min(int(tuple[2])+1,self.size)):
-            for j in range(max(int(tuple[1]),0),min(int(tuple[3])+1,self.size)):
+        for i in range (max(min(int(tuple[0]),int(tuple[2])),0),min(max(int(tuple[2])+1,int(tuple[0])+1),self.size)):
+            for j in range(max(min(int(tuple[1]),int(tuple[3])),0),min(max(int(tuple[1])+1,int(tuple[3])+1),self.size)):
                 if self.lights[i][j]:
                     self.lights[i][j]=False
-                    self.count-=1
                     
     def switch(self,tuple):
-        for i in range (max(int(tuple[0]),0),min(int(tuple[2])+1,self.size)):
-            for j in range(max(int(tuple[1]),0),min(int(tuple[3])+1,self.size)):
+        for i in range (max(min(int(tuple[0]),int(tuple[2])),0),min(max(int(tuple[2])+1,int(tuple[0])+1),self.size)):
+            for j in range(max(min(int(tuple[1]),int(tuple[3])),0),min(max(int(tuple[1])+1,int(tuple[3])+1),self.size)):
                 if self.lights[i][j]:
                     self.lights[i][j] = False
-                    self.count-=1
                 else:
                     self.lights[i][j] = True
-                    self.count+=1
          
     def apply(self,cmd):
         if cmd[0] == 'turn on':
@@ -44,3 +41,11 @@ class lightTester:
             self.turn_off(cmd[1:])
         elif cmd[0]=='switch':
             self.switch(cmd[1:])
+
+    def count(self):
+        count=0
+        for i in self.lights:
+            for j in i:
+                if j:
+                    count+=1
+        return count
