@@ -8,14 +8,12 @@ skeleton code from Assignmnt3: hints
 from lightTester import lightTester
 import parse_file, sys
 
-def main(filename):
+def main():
     #source: https://stackoverflow.com/questions/40753946/python-setup-tools-console-scripts-with-arguments 
     arg1, arg2 = sys.argv[1], sys.argv[2]
     print(arg1, arg2)
     
-    start=time.time()
-    instructions = parse_file.ParseFile(filename)
-    print(time.time()-start)
+    instructions = parse_file.ParseFile(arg2)
     
     lights = lightTester(int(instructions.lines[0]))
     
@@ -25,4 +23,4 @@ def main(filename):
     print("#occupied:",lights.count()) 
     
 if __name__ == '__main__':
-    main('commands.txt')
+    main()
