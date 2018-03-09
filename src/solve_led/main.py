@@ -15,7 +15,7 @@ def main():
         if arg1=='--input'or arg1=='-I':
             instructions = parse_file.ParseFile(arg2)
             
-            if instructions.bad_file or instructions.bad_url:
+            if instructions.bad_file and instructions.bad_url:
                 raise Exception("Please type a valid file or URL")
     
             lights = lightTester(int(instructions.lines[0]))
