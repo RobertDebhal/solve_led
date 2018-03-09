@@ -23,7 +23,7 @@ def main():
             for i in range(1,len(instructions.lines)):
                 lights.apply(instructions.lines[i])
     
-            print("#occupied:",lights.count()) 
+            print("#lights on:",lights.count()) 
         else:
             print(arg1+" is not recognised as a valid option")
     else:
