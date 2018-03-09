@@ -8,6 +8,8 @@ import sys
 class ParseFile:
     def __init__(self,filename,type='local'):
         
+        self.bad_file=False
+        self.bad_url=False
         try:
             self.file = open(filename,'r')
         except FileNotFoundError:

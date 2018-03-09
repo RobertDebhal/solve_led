@@ -62,15 +62,15 @@ class TestParseFileClass(unittest.TestCase):
     
     def test_file_url_valid(self):
         file = ParseFile('http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt')
-        self.assertTrue(file.bad_url==True)
+        self.assertTrue(file.bad_url==False)
         
     def test_file_url_invalid(self):
         file = ParseFile('http://claritytrec.ucd.ie/doesNotExist.txt')
-        self.assertIsNotNone(file)
+        self.assertTrue(file.bad_url==True)
     
     def test_file_local_valid(self):
         file = ParseFile('commands.txt')
-        self.assertIsNotNone(file)
+        self.assertTrue(file.bad_file==False)
     
     def test_file_local_invalid(self):
         file = ParseFile('doesNotExist')
