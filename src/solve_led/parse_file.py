@@ -11,7 +11,6 @@ class ParseFile:
         try:
             self.file = open(filename,'r')
         except FileNotFoundError:
-            file_not_found=True
             type='https'
             
             
@@ -32,7 +31,11 @@ class ParseFile:
                 self.file = url.urlopen(filename)
             except ValueError:
                 print("Please type a valid URL or filename")
-                return
+                return None
+            except HTTPError:
+                print("Please type a valid URL or filename")
+                return None
+                
             self.lines = self.file.readlines()
             for i in range(len(self.lines)):
                 self.lines[i] = self.lines[i].decode('utf-8')
