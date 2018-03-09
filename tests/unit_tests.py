@@ -6,9 +6,8 @@ Created on 1 Mar 2018
 @author: robbie
 '''
 import unittest
-from lightTester import *
-#from solve_led.lightTester import *
-#from solve_led.console_script import *
+from solve_led.lightTester import *
+from solve_led.parse_file import *
 
 class TestLightTesterClass(unittest.TestCase):
     def test_turn_on(self):
@@ -46,7 +45,6 @@ class TestLightTesterClass(unittest.TestCase):
         lights.switch((0,0,999,999)) #switch all lights. count should be 997,000
         self.assertTrue(lights.count()==997000) #check count. Should be 997,000 
         
-        
     def test_apply(self):
         lights = lightTester(1000)
         lights.apply(('turn on', '51', '51', '100', '100')) #count should now be 2,500
@@ -56,12 +54,24 @@ class TestLightTesterClass(unittest.TestCase):
                                                    #count should now be 997,500
         lights.apply(('turn off', '900', '0', '1000', '1000')) #should correct for light out of range.
                                                    #count should now be 897,500
-        self.assertTrue(lights.count()==897500)
-        
-class ConsoleScriptTest:
-    def check_file(self):
-        """
-        Also should check at this stage for incorrect commands to ignore
-        self.Assert(fileCheck==True) #check for the existence of input file
-        """
+        lights.apply((('switch', '999' ,'999', '0','0')))#should allow for high to low command.
+                                                   #count should now be 102,500
+        self.assertTrue(lights.count()==102500)
     
+class TestParseFileClass(unittest.TestCase):
+    
+    def test_file_url_valid(self):
+        file = ParseFile('http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt')
+        self.assertIsNotNone(file)
+        
+    def test_file_url_invalid(self):
+        file = ParseFile('http://claritytrec.ucd.ie/doesNotExist.txt')
+        self.assertIsNotNone(file)
+    
+    def test_file_local_valid(self):
+        file = ParseFile('commands.txt')
+        self.assertIsNotNone(file)
+    
+    def test_file_local_invalid(self):
+        file = ParseFile('doesNotExist')
+        self.assertIsNone(file)
