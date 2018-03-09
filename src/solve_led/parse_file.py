@@ -12,7 +12,7 @@ class ParseFile:
             self.file = open(filename,'r')
         except FileNotFoundError:
             type='https'
-            bad_file=True
+            self.bad_file=True
             
             
         valid = re.compile(".*(turn on|turn off|switch)\s*([+-]?\d+)\s*,\s*([+-]?\d+)\s*through\s*([+-]?\d+)\s*,\s*([+-]?\d+).*")
@@ -41,9 +41,9 @@ class ParseFile:
                                        valid.match(self.lines[i]).group(5))
             except ValueError:
                 print("Please type a valid URL or filename")
-                bad_url=True
+                self.bad_url=True
             except url.HTTPError:
-                bad_url=True
+                self.bad_url=True
                 
             
             
